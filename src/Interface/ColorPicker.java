@@ -28,14 +28,24 @@ public class ColorPicker extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jColorChooser1 = new javax.swing.JColorChooser();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jColorChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, -1, 370));
+        jPanel1.add(jColorChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 340));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 690, 400));
+        jButton1.setBackground(new java.awt.Color(136, 157, 236));
+        jButton1.setText("Anuler");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 100, 30));
+
+        jButton2.setBackground(new java.awt.Color(136, 157, 236));
+        jButton2.setText("OK");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 100, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -76,6 +86,8 @@ public class ColorPicker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

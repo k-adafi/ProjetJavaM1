@@ -7,8 +7,10 @@ package Interface;
 //import com.mysql.jdbc.Connection;
 //import com.mysql.jdbc.PreparedStatement;
 //import com.mysql.jdbc.Statement;
+import java.awt.event.ActionEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import miaproject.database;
 
 /**
@@ -43,7 +45,13 @@ public class Connecter extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
+        try {
+            jPanelSeConnecter =(javax.swing.JPanel)java.beans.Beans.instantiate(getClass().getClassLoader(), "Interface.Connecter_jPanelSeConnecter");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
         connectNomTxtfield = new javax.swing.JTextField();
         connectPasswordTxtfield = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -65,9 +73,7 @@ public class Connecter extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(330, 410));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(136, 157, 236));
-        jPanel2.setPreferredSize(new java.awt.Dimension(350, 400));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelSeConnecter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         connectNomTxtfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         connectNomTxtfield.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +81,7 @@ public class Connecter extends javax.swing.JFrame {
                 connectNomTxtfieldActionPerformed(evt);
             }
         });
-        jPanel2.add(connectNomTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 230, 30));
+        jPanelSeConnecter.add(connectNomTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 230, 30));
 
         connectPasswordTxtfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         connectPasswordTxtfield.addActionListener(new java.awt.event.ActionListener() {
@@ -83,18 +89,18 @@ public class Connecter extends javax.swing.JFrame {
                 connectPasswordTxtfieldActionPerformed(evt);
             }
         });
-        jPanel2.add(connectPasswordTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 30));
+        jPanelSeConnecter.add(connectPasswordTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 30));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tonga soa");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+        jPanelSeConnecter.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Se connecter");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 30));
+        jPanelSeConnecter.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -107,13 +113,18 @@ public class Connecter extends javax.swing.JFrame {
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 10, 30));
+        jPanelSeConnecter.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 10, 30));
 
         connectMotDePasseOublierBtn.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         connectMotDePasseOublierBtn.setForeground(new java.awt.Color(255, 255, 255));
         connectMotDePasseOublierBtn.setText("Mot de passe oublier?");
         connectMotDePasseOublierBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(connectMotDePasseOublierBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
+        connectMotDePasseOublierBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                connectMotDePasseOublierBtnMouseClicked(evt);
+            }
+        });
+        jPanelSeConnecter.add(connectMotDePasseOublierBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
 
         connectConnexionBtn.setBackground(new java.awt.Color(204, 255, 255));
         connectConnexionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/log-in.png"))); // NOI18N
@@ -129,14 +140,14 @@ public class Connecter extends javax.swing.JFrame {
                 connectConnexionBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(connectConnexionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 230, 40));
+        jPanelSeConnecter.add(connectConnexionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 230, 40));
 
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Bienvenue");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        jPanelSeConnecter.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 350, 400));
+        getContentPane().add(jPanelSeConnecter, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 350, 400));
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 400));
@@ -223,12 +234,80 @@ public class Connecter extends javax.swing.JFrame {
                    alert.showMessageDialog(null, "Une de ces informations est incorecte");
                 }
                
-               
            }
            
         }catch(Exception e){e.printStackTrace();}
     }//GEN-LAST:event_connectConnexionBtnActionPerformed
 
+    
+//    //Pour switch forme dans le menu demmarer
+//    public void switchFormConnect(ActionEvent event){
+//        
+//        if (event.getSource() == connectMotDePasseOublierBtn) {
+//            jPanelMotdePasseOublier.setVisible(true);
+//            jPanelSeConnecter.setVisible(false);
+//
+//        } else if (event.getSource() == changePasswordRetourBtn) {
+//            jPanelMotdePasseOublier.setVisible(false);
+//            jPanelSeConnecter.setVisible(true);
+//        }
+//        
+//    }
+//    
+    
+//    private void connectConnexionBtnActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+//    // Afficher la boîte de dialogue de confirmation
+//    int response = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir vous connecter ?", "Message de confirmation",
+//                                                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//    
+//    // Si l'utilisateur clique sur "Oui"
+//    if (response == JOptionPane.YES_OPTION) {
+//        String sql = "SELECT * FROM admin WHERE nomA = ? and passwordA = ? ";
+//        
+//        connect = (Connection) Database.connectDb();
+//
+//        try {
+//            PreparedStatement prepare = connect.prepareStatement(sql);
+//            prepare.setString(1, connectNomTxtfield.getText());
+//            prepare.setString(2, connectPasswordTxtfield.getText());
+//
+//            ResultSet result = prepare.executeQuery();
+//            JOptionPane alert;
+//
+//            if (connectNomTxtfield.getText().isEmpty() || connectPasswordTxtfield.getText().isEmpty()) {
+//                alert = new JOptionPane(JOptionPane.ERROR_MESSAGE);
+//                alert.showMessageDialog(null, "S'il vous plaît, vous devez d'abord compléter ces formulaires.");
+//                
+//            } else {
+//                if (result.next()) {
+//                    getData.username = connectNomTxtfield.getText();
+//
+//                    alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+//                    alert.showMessageDialog(null, "Connexion réussie!");
+//
+//                    // Fermer la fenêtre actuelle et ouvrir le tableau de bord
+//                    Connecter.super.dispose();
+//                    Dashboard dash = new Dashboard();
+//                    dash.setVisible(true);
+//
+//                } else {
+//                    alert = new JOptionPane(JOptionPane.ERROR_MESSAGE);
+//                    alert.showMessageDialog(null, "Une de ces informations est incorrecte");
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    } else {
+//        // Si l'utilisateur clique sur "Non"
+//        JOptionPane.showMessageDialog(null, "Connexion annulée");
+//    }
+//}
+
+    
+    
+    
     private void connectInscriptionBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_connectInscriptionBtnMouseClicked
         // TODO add your handling code here:
         Connecter.super.dispose();
@@ -245,6 +324,11 @@ public class Connecter extends javax.swing.JFrame {
     private void connectPasswordTxtfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectPasswordTxtfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_connectPasswordTxtfieldActionPerformed
+
+    private void connectMotDePasseOublierBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_connectMotDePasseOublierBtnMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_connectMotDePasseOublierBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -295,8 +379,8 @@ public class Connecter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelSeConnecter;
     // End of variables declaration//GEN-END:variables
 }

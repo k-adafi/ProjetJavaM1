@@ -183,7 +183,7 @@ public class Inscription extends javax.swing.JFrame {
                 + "(nomA, EmailA, passwordA)"
                 + "VALUES(?,?,?)";
         
-        connect = database.ConnectDb();
+        connect = (Connection) database.ConnectDb();
         
         try{     
             JOptionPane alert;
@@ -217,11 +217,21 @@ public class Inscription extends javax.swing.JFrame {
                     prepare.setString(1, inscrptNomTextfield.getText());
                     prepare.setString(2, inscrptEmailTextfield.getText());
                     prepare.setString(3, inscrptPasswordTextfield.getText());
-                    prepare.executeUpdate();
                     
                        
-                    alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
-                    alert.showMessageDialog(null, "Utilisateur ajouter avec succès!");
+                    // Afficher la boîte de dialogue de confirmation
+                    int response = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir ajouter un nouveau utilisateur?", "Message de confirmation",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    
+                    // Si l'utilisateur clique sur "Oui"
+                    if (response == JOptionPane.YES_OPTION) {
+                        
+                        prepare.executeUpdate();
+                        
+                        alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+                        alert.showMessageDialog(null, "Ajout réussi!");
+                  
+                    }
                     
                     inscrptNomTextfield.setText("");
                     inscrptEmailTextfield.setText("");

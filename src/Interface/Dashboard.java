@@ -4,20 +4,47 @@
  */
 package Interface;
 
-import java.util.Optional;
-import javax.swing.JOptionPane;
+import Controller.DashboardController;
+import Controller.ZoneDessinController;
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import miaproject.database;
 
 /**
  *
  * @author KADAFI Ben
  */
 public class Dashboard extends javax.swing.JFrame {
-
+    
+    
+    private Connection connect;
+    
+    private PreparedStatement prepare;
+    
+    private Statement statement;
+    
+    private ResultSet result;
+    
+    Graphics g;
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
+                
+        displayUsername();
+        
+//        g = jPanelZoneDessin.getGraphics();
+//        jPanelZoneDessin.paintComponents(g);
+//        DashboardController dash = new DashboardController(jPanelZoneDessin);
+//        jPanelZoneDessin.addMouseListener(new ZoneDessinController (dash));
+//        dash.start();
+    
     }
 
     /**
@@ -32,51 +59,47 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        NomUtilisateur = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabelNomUtilisateur = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         dashboardLogoutBtn = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        sectionTerain = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
-        jComboBoxLargeurTerrain = new javax.swing.JComboBox<>();
-        jComboBoxHauteurTerrain = new javax.swing.JComboBox<>();
         jLabel37 = new javax.swing.JLabel();
-        jButtonValiderTerrain = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jTextFieldNomTerrain = new javax.swing.JTextField();
+        jButtonValiderTerrain = new javax.swing.JButton();
+        jSpinnerLargeurTerrain = new javax.swing.JSpinner();
+        jSpinnerHauteurTerrain = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
+        sectionMaison = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        jButtonValiderMaison = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldNomMaison = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jComboBox9 = new javax.swing.JComboBox<>();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jComboBox12 = new javax.swing.JComboBox<>();
         jLabel44 = new javax.swing.JLabel();
-        jComboBox11 = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
         jLabel48 = new javax.swing.JLabel();
-        jComboBox13 = new javax.swing.JComboBox<>();
+        jSpinnerHautMaison = new javax.swing.JSpinner();
+        jSpinnerBasMaison = new javax.swing.JSpinner();
+        jSpinnerNbrDeChambreMaison = new javax.swing.JSpinner();
+        jSpinnerGaucheMaison = new javax.swing.JSpinner();
+        jSpinnerDroiteMaison = new javax.swing.JSpinner();
+        jSpinnerHauteurMaison = new javax.swing.JSpinner();
+        jSpinnerLargeurMaison = new javax.swing.JSpinner();
         jLabel9 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabelColorPicker = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -85,14 +108,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        rectangleD = new javax.swing.JLabel();
+        cercleD = new javax.swing.JLabel();
+        ligneD = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelZoneDessin = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButtonEffacerTout = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -106,13 +132,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user (2).png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 50, 70));
-
-        NomUtilisateur.setBackground(new java.awt.Color(255, 255, 255));
-        NomUtilisateur.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
-        NomUtilisateur.setForeground(new java.awt.Color(255, 255, 255));
-        NomUtilisateur.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        NomUtilisateur.setText("User name");
-        jPanel1.add(NomUtilisateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, 150, 70));
 
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +163,12 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/save.png"))); // NOI18N
         jLabel16.setText("Enregistrer sous");
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 150, 70));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 150, 70));
+
+        jLabelNomUtilisateur.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
+        jLabelNomUtilisateur.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNomUtilisateur.setText("User name");
+        jPanel1.add(jLabelNomUtilisateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(1047, 6, 140, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 70));
 
@@ -161,64 +185,32 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jPanel2.add(dashboardLogoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 110, 30));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
-        jButton1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/refresh-page-option.png"))); // NOI18N
-        jButton1.setText("Actualiser");
-        jButton1.setToolTipText("");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 120, -1));
-
-        jButton3.setBackground(new java.awt.Color(204, 255, 255));
-        jButton3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/edit-button.png"))); // NOI18N
-        jButton3.setText("Modifier");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 130, -1));
-
-        jButton4.setBackground(new java.awt.Color(204, 255, 255));
-        jButton4.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/delete.png"))); // NOI18N
-        jButton4.setText("Effacer");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 540, 130, -1));
-
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        sectionTerain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel36.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setText("Largeur:");
-        jPanel5.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 70, 20));
-
-        jComboBoxLargeurTerrain.setEditable(true);
-        jComboBoxLargeurTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jComboBoxLargeurTerrain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxLargeurTerrainActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jComboBoxLargeurTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 110, 20));
-
-        jComboBoxHauteurTerrain.setEditable(true);
-        jComboBoxHauteurTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel5.add(jComboBoxHauteurTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, 20));
+        sectionTerain.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 70, 20));
 
         jLabel37.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setText(" Hauteur:");
-        jPanel5.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 70, 20));
+        sectionTerain.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 70, 20));
 
-        jButtonValiderTerrain.setBackground(new java.awt.Color(136, 157, 236));
+        jLabel41.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel41.setText("Nom du terrain:");
+        sectionTerain.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 20));
+
+        jTextFieldNomTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jTextFieldNomTerrain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomTerrainActionPerformed(evt);
+            }
+        });
+        sectionTerain.add(jTextFieldNomTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 30));
+
+        jButtonValiderTerrain.setBackground(new java.awt.Color(8, 126, 245));
         jButtonValiderTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jButtonValiderTerrain.setForeground(new java.awt.Color(255, 255, 255));
         jButtonValiderTerrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
@@ -231,159 +223,130 @@ public class Dashboard extends javax.swing.JFrame {
                 jButtonValiderTerrainActionPerformed(evt);
             }
         });
-        jPanel5.add(jButtonValiderTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 110, -1));
+        sectionTerain.add(jButtonValiderTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 110, -1));
 
-        jLabel41.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel41.setText("Nom du terrain:");
-        jPanel5.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 20));
+        jSpinnerLargeurTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerLargeurTerrain.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionTerain.add(jSpinnerLargeurTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 110, 30));
 
-        jTextFieldNomTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jTextFieldNomTerrain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomTerrainActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jTextFieldNomTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 30));
+        jSpinnerHauteurTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerHauteurTerrain.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionTerain.add(jSpinnerHauteurTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, 30));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 140));
+        jPanel2.add(sectionTerain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 150));
 
         jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Générer terrain");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 90, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 90, 20));
 
-        jButton5.setBackground(new java.awt.Color(204, 255, 255));
-        jButton5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
-        jButton5.setText("Ajouter");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setMaximumSize(new java.awt.Dimension(110, 31));
-        jButton5.setMinimumSize(new java.awt.Dimension(110, 31));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 120, -1));
-
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        sectionMaison.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel38.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel38.setText("Largeur:");
-        jPanel6.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, 20));
+        sectionMaison.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
 
-        jButton6.setBackground(new java.awt.Color(136, 157, 236));
-        jButton6.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
-        jButton6.setText("Valider");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setMaximumSize(new java.awt.Dimension(110, 31));
-        jButton6.setMinimumSize(new java.awt.Dimension(110, 31));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonValiderMaison.setBackground(new java.awt.Color(8, 126, 245));
+        jButtonValiderMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jButtonValiderMaison.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonValiderMaison.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
+        jButtonValiderMaison.setText("Valider");
+        jButtonValiderMaison.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonValiderMaison.setMaximumSize(new java.awt.Dimension(110, 31));
+        jButtonValiderMaison.setMinimumSize(new java.awt.Dimension(110, 31));
+        jButtonValiderMaison.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonValiderMaisonActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 110, -1));
+        sectionMaison.add(jButtonValiderMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 110, -1));
 
         jLabel40.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel40.setText("Nbr de chambre:");
         jLabel40.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel6.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 110, 20));
+        sectionMaison.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 110, 20));
 
-        jTextField2.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 30));
+        jTextFieldNomMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        sectionMaison.add(jTextFieldNomMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 30));
 
         jLabel42.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel42.setText("Nom du villa:");
-        jPanel6.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 110, 20));
-
-        jComboBox8.setEditable(true);
-        jComboBox8.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox8ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 110, 20));
-
-        jComboBox7.setEditable(true);
-        jComboBox7.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 110, 20));
-
-        jComboBox9.setEditable(true);
-        jComboBox9.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 110, 20));
+        sectionMaison.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 110, 20));
 
         jLabel46.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel46.setText("Hauteur:");
-        jPanel6.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 70, 20));
+        sectionMaison.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 70, 20));
 
         jLabel47.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel47.setText("Taille");
-        jPanel6.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 80, 20));
+        sectionMaison.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 80, 20));
 
         jLabel39.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel39.setText("Marge");
-        jPanel6.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 20));
+        sectionMaison.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 20));
 
         jLabel45.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel45.setText("Haut");
-        jPanel6.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 70, 20));
-
-        jComboBox12.setEditable(true);
-        jComboBox12.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 20));
+        sectionMaison.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 70, 20));
 
         jLabel44.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel44.setText("Bas");
-        jPanel6.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 70, 20));
-
-        jComboBox11.setEditable(true);
-        jComboBox11.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jComboBox11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox11ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 110, 20));
+        sectionMaison.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 20));
 
         jLabel43.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel43.setText("Gauche");
         jLabel43.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel6.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 110, 20));
-
-        jComboBox10.setEditable(true);
-        jComboBox10.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, 20));
+        sectionMaison.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, 20));
 
         jLabel48.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel48.setText("Droite");
         jLabel48.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel6.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, 20));
+        sectionMaison.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 110, 20));
 
-        jComboBox13.setEditable(true);
-        jComboBox13.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel6.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, 20));
+        jSpinnerHautMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerHautMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerHautMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 110, 30));
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 280, 290));
+        jSpinnerBasMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerBasMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerBasMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 110, 30));
+
+        jSpinnerNbrDeChambreMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerNbrDeChambreMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerNbrDeChambreMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 110, 30));
+
+        jSpinnerGaucheMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerGaucheMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerGaucheMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, 30));
+
+        jSpinnerDroiteMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerDroiteMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerDroiteMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 110, 30));
+
+        jSpinnerHauteurMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerHauteurMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerHauteurMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 110, 30));
+
+        jSpinnerLargeurMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerLargeurMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionMaison.add(jSpinnerLargeurMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 110, 30));
+
+        jPanel2.add(sectionMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 280, 360));
 
         jLabel9.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Générer Maison");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 90, 20));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 90, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 300, 620));
 
@@ -397,11 +360,16 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(136, 157, 236));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel27.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/art.png"))); // NOI18N
-        jLabel27.setText("    Couleur");
-        jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel10.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 60));
+        jLabelColorPicker.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabelColorPicker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/art.png"))); // NOI18N
+        jLabelColorPicker.setText("    Couleur");
+        jLabelColorPicker.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelColorPicker.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelColorPickerMouseClicked(evt);
+            }
+        });
+        jPanel10.add(jLabelColorPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 60));
 
         jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 160, -1));
 
@@ -430,14 +398,14 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rubber.png"))); // NOI18N
         jPanel11.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, -1, 60));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rectangle.png"))); // NOI18N
-        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 60));
+        rectangleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rectangle.png"))); // NOI18N
+        jPanel11.add(rectangleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 60));
 
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/dry-clean.png"))); // NOI18N
-        jPanel11.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, 60));
+        cercleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/dry-clean.png"))); // NOI18N
+        jPanel11.add(cercleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, 60));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/line.png"))); // NOI18N
-        jPanel11.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, 60));
+        ligneD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/line.png"))); // NOI18N
+        jPanel11.add(ligneD, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, 60));
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/window.png"))); // NOI18N
         jPanel11.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, -1, 60));
@@ -453,16 +421,66 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 1020, 60));
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelZoneDessin.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelZoneDessin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setViewportView(jPanelZoneDessin);
 
-        jPanel3.setBackground(new java.awt.Color(136, 157, 236));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel7.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 200, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 1000, 480));
 
-        jScrollPane1.setViewportView(jPanel7);
+        jButton5.setBackground(new java.awt.Color(8, 126, 245));
+        jButton5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
+        jButton5.setText("Ajouter");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setMaximumSize(new java.awt.Dimension(110, 31));
+        jButton5.setMinimumSize(new java.awt.Dimension(110, 31));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 640, 130, -1));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 980, 520));
+        jButton3.setBackground(new java.awt.Color(8, 126, 245));
+        jButton3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/edit-button.png"))); // NOI18N
+        jButton3.setText("Modifier");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 640, 140, -1));
+
+        jButtonEffacerTout.setBackground(new java.awt.Color(8, 126, 245));
+        jButtonEffacerTout.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jButtonEffacerTout.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEffacerTout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/delete.png"))); // NOI18N
+        jButtonEffacerTout.setText("Effacer tout");
+        jButtonEffacerTout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEffacerTout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEffacerToutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonEffacerTout, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, 130, -1));
+
+        jButton1.setBackground(new java.awt.Color(8, 126, 245));
+        jButton1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/refresh-page-option.png"))); // NOI18N
+        jButton1.setText("Actualiser");
+        jButton1.setToolTipText("");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 640, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -470,57 +488,166 @@ public class Dashboard extends javax.swing.JFrame {
     //Sur le nom d'utilisateur
     public void displayUsername() {
         
-        NomUtilisateur.setText(getData.username);
+        jLabelNomUtilisateur.setText(getData.username);
+        
     }
     
-    
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonEffacerToutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEffacerToutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        jPanelZoneDessin.repaint();
+    }//GEN-LAST:event_jButtonEffacerToutActionPerformed
 
     private void dashboardLogoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardLogoutBtnMouseClicked
-        // TODO add your handling code here:
-        Dashboard.super.dispose();
-        Connecter connect = new Connecter();
-        connect.setVisible(true);               
+      
+        JOptionPane alert;
+        // Afficher la boîte de dialogue de confirmation
+        int response = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir déconnecter?", "Message de confirmation",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    
+        // Si l'utilisateur clique sur "Oui"
+        if (response == JOptionPane.YES_OPTION) {
+              
+            Dashboard.super.dispose();
+            Connecter connect = new Connecter();
+            connect.setVisible(true);
+                        
+        }else{
+            
+        }               
        
     }//GEN-LAST:event_dashboardLogoutBtnMouseClicked
 
     private void jButtonValiderTerrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderTerrainActionPerformed
         // TODO add your handling code here:
-        jTextFieldNomTerrain.getText();
-        jComboBoxHauteurTerrain.getSelectedItem();
-        jComboBoxLargeurTerrain.getSelectedItem();
+        JOptionPane alert;
+        try {
+            if (jTextFieldNomTerrain.getText().isEmpty()
+                    || jSpinnerHauteurTerrain.getValue().equals(0)
+                    || jSpinnerLargeurTerrain.getValue().equals(0)) {
+                
+                alert = new JOptionPane(JOptionPane.ERROR_MESSAGE);
+                alert.showMessageDialog(null, "S'il vous plaît, vous devez d'abord complétez ces cases.");
+                
+            }else{
+                
+                // Insertion des données dans la base de données
+                String sql = "INSERT INTO terrain (nomT, hauteurT, largeurT)"
+                        + "VALUES (?, ?, ?)";
+                
+                connect = (Connection) database.ConnectDb();
+                
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1, jTextFieldNomTerrain.getText());
+                prepare.setInt(2, (int) jSpinnerHauteurTerrain.getValue());
+                prepare.setInt(3, (int) jSpinnerLargeurTerrain.getValue());
+                
+                prepare.executeUpdate();
+                
+                int hauteur = (int) jSpinnerHauteurTerrain.getValue();
+                int largeur = (int) jSpinnerLargeurTerrain.getValue();
+                      
+                alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+                alert.showMessageDialog(null, "Réussi");
+                
+//                g.drawRect(50, 50, largeur, hauteur);
+                
+                jTextFieldNomTerrain.setText("");
+                jSpinnerHauteurTerrain.setValue(0);
+                jSpinnerLargeurTerrain.setValue(0);
+            }
+            
+            
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+ 
     }//GEN-LAST:event_jButtonValiderTerrainActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonValiderMaisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderMaisonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jComboBoxLargeurTerrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLargeurTerrainActionPerformed
+        
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxLargeurTerrainActionPerformed
+        JOptionPane alert;
+        try {
+            if (jTextFieldNomMaison.getText().isEmpty()
+                    || jSpinnerHautMaison.getValue().equals(0)
+                    || jSpinnerBasMaison.getValue().equals(0)
+                    || jSpinnerGaucheMaison.getValue().equals(0)
+                    || jSpinnerDroiteMaison.getValue().equals(0)
+                    || jSpinnerHauteurMaison.getValue().equals(0)
+                    || jSpinnerLargeurMaison.getValue().equals(0)
+                    || jSpinnerNbrDeChambreMaison.getValue().equals(0)) {
+                
+                alert = new JOptionPane(JOptionPane.ERROR_MESSAGE);
+                alert.showMessageDialog(null, "S'il vous plaît, vous devez d'abord complétez ces cases.");
+                
+            }else{
+                
+                // Insertion des données dans la base de données
+                String sql = "INSERT INTO maison (nomM, hautM, basM, gaucheM, droiteM, hauteurM, largeurM, nbrChambreM)"
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                
+                connect = (Connection) database.ConnectDb();
+                
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1, jTextFieldNomMaison.getText());
+                prepare.setInt(2, (int) jSpinnerHautMaison.getValue());
+                prepare.setInt(3, (int) jSpinnerBasMaison.getValue());
+                prepare.setInt(4, (int) jSpinnerGaucheMaison.getValue());
+                prepare.setInt(5, (int) jSpinnerDroiteMaison.getValue());
+                prepare.setInt(6, (int) jSpinnerHauteurMaison.getValue());
+                prepare.setInt(7, (int) jSpinnerLargeurMaison.getValue());
+                prepare.setInt(8, (int) jSpinnerNbrDeChambreMaison.getValue());
+                
+                prepare.executeUpdate();
+                    
+                       
+                alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
+                alert.showMessageDialog(null, "Réussi");
+                
+                jTextFieldNomMaison.setText("");
+                jSpinnerHautMaison.setValue(0);
+                jSpinnerBasMaison.setValue(0);
+                jSpinnerGaucheMaison.setValue(0);
+                jSpinnerDroiteMaison.setValue(0);
+                jSpinnerHauteurMaison.setValue(0);
+                jSpinnerLargeurMaison.setValue(0);
+                jSpinnerNbrDeChambreMaison.setValue(0);
+            }
+            
+            
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        
+        
+    }//GEN-LAST:event_jButtonValiderMaisonActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox8ActionPerformed
-
-    private void jComboBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox11ActionPerformed
-
     private void jTextFieldNomTerrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomTerrainActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomTerrainActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jLabelColorPickerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelColorPickerMouseClicked
+        // TODO add your handling code here
+        ColorPicker colPick = new ColorPicker();
+        colPick.setVisible(true);
+        
+//       colPick.setVisible(false);
+    }//GEN-LAST:event_jLabelColorPickerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -550,8 +677,17 @@ public class Dashboard extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Dashboard().setVisible(true);
+//            }
+//        });
+        
+        // Exécuter l'application sur le thread de dispatch des événements
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
+                // Créer une instance de la fenêtre et la rendre visible
                 new Dashboard().setVisible(true);
             }
         });
@@ -560,32 +696,19 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel NomUtilisateur;
+    private javax.swing.JLabel cercleD;
     private javax.swing.JLabel dashboardLogoutBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonEffacerTout;
+    private javax.swing.JButton jButtonValiderMaison;
     private javax.swing.JButton jButtonValiderTerrain;
-    public javax.swing.JComboBox<Integer> jComboBox10;
-    public javax.swing.JComboBox<Integer> jComboBox11;
-    public javax.swing.JComboBox<Integer> jComboBox12;
-    public javax.swing.JComboBox<Integer> jComboBox13;
-    public javax.swing.JComboBox<Integer> jComboBox7;
-    public javax.swing.JComboBox<Integer> jComboBox8;
-    public javax.swing.JComboBox<Integer> jComboBox9;
-    public javax.swing.JComboBox<Integer> jComboBoxHauteurTerrain;
-    public javax.swing.JComboBox<Integer> jComboBoxLargeurTerrain;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -609,19 +732,31 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelColorPicker;
+    private javax.swing.JLabel jLabelNomUtilisateur;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelZoneDessin;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JSpinner jSpinnerBasMaison;
+    private javax.swing.JSpinner jSpinnerDroiteMaison;
+    private javax.swing.JSpinner jSpinnerGaucheMaison;
+    private javax.swing.JSpinner jSpinnerHautMaison;
+    private javax.swing.JSpinner jSpinnerHauteurMaison;
+    private javax.swing.JSpinner jSpinnerHauteurTerrain;
+    private javax.swing.JSpinner jSpinnerLargeurMaison;
+    private javax.swing.JSpinner jSpinnerLargeurTerrain;
+    private javax.swing.JSpinner jSpinnerNbrDeChambreMaison;
+    private javax.swing.JTextField jTextFieldNomMaison;
     private javax.swing.JTextField jTextFieldNomTerrain;
+    private javax.swing.JLabel ligneD;
+    private javax.swing.JLabel rectangleD;
+    private javax.swing.JPanel sectionMaison;
+    private javax.swing.JPanel sectionTerain;
     // End of variables declaration//GEN-END:variables
 }
