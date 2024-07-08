@@ -5,6 +5,7 @@
 package Interface;
 
 import Controller.MyObjectController;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class ZonneDessinContrainte extends javax.swing.JPanel {
     List<MyObjectController> ligne, rectangle, cercle;
     
     List<terrainData> terrain;
+    
+    Color color = Color.BLACK;
 
     public ZonneDessinContrainte() {
         initComponents();        
@@ -50,15 +53,19 @@ public class ZonneDessinContrainte extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void ajouterLigne(int x1, int y1, int x2, int y2) {
-        ligne.add(new MyObjectController(x1, y1, x2, y2));
+        ligne.add(new MyObjectController(x1, y1, x2, y2, color));
     }
 
     public void ajouterRectangle(int x1, int y1, int x2, int y2) {
-        rectangle.add(new MyObjectController(x1, y1, x2, y2));
+        rectangle.add(new MyObjectController(x1, y1, x2, y2, color));
     }
     
     public void ajouterCercle(int x1, int y1, int x2, int y2) {
-        cercle.add(new MyObjectController(x1, y1, x2, y2));
+        cercle.add(new MyObjectController(x1, y1, x2, y2, color));
+    }
+    
+    public void setColor(Color c) {
+        color=c;
     }
     
     public void effacer(int x1, int y1, int x2, int y2) {
@@ -84,16 +91,20 @@ public class ZonneDessinContrainte extends javax.swing.JPanel {
     public void paint(Graphics g) {
         super.paint(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
         
+        
         for (MyObjectController myObjectLigne : ligne) {
+            g.setColor(myObjectLigne.color);
             g.drawLine(myObjectLigne.x1, myObjectLigne.y1, myObjectLigne.x2, myObjectLigne.y2);
             
         }
         
         for (MyObjectController myObjectRectangle : rectangle) {
+            g.setColor(myObjectRectangle.color);
             g.drawRect(myObjectRectangle.getMinX(), myObjectRectangle.getMinY(), myObjectRectangle.getWidth(), myObjectRectangle.getHeight());
         }
         
         for (MyObjectController myObjectCercle : cercle) {
+            g.setColor(myObjectCercle.color);
             g.drawOval(myObjectCercle.getMinX(), myObjectCercle.getMinY(), myObjectCercle.getWidth(), myObjectCercle.getHeight());
         }
         
@@ -101,6 +112,7 @@ public class ZonneDessinContrainte extends javax.swing.JPanel {
             g.drawRect(myObjectTerrain.getMinX(), myObjectTerrain.getMinY(), myObjectTerrain.getWidth(), myObjectTerrain.getHeight());
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

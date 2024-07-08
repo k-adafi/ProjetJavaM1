@@ -44,7 +44,9 @@ public class Dashboard extends javax.swing.JFrame {
         
         ZonneDessinContrainte jPanelZoneDessin = new ZonneDessinContrainte();
         DashboardController dash = new DashboardController(jPanelZoneDessin, 
-                jButtonValiderTerrain ,rectangleD, ligneD, cercleD, gaumeD);
+                jButtonValiderTerrain ,rectangleD, ligneD, cercleD, gaumeD,
+                noireCou, blancCou, rougeCou, bleueCou, verteCou, jauneCou,
+                orangeCou, roseCou);
         jPanelZoneDessin.addMouseListener(new ZoneDessinController(dash));
         ajouterMonZoneDessinContrainte(jPanelZoneDessin);
         dash.start();
