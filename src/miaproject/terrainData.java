@@ -10,38 +10,34 @@ package miaproject;
  */
 public class terrainData {
     
-    private String nomT;
-    private Integer hauteurT;
-    private Integer largeurT;
+    private Integer hauteurTy1;
+    private Integer largeurTx1;
+    private Integer hauteurTy2;
+    private Integer largeurTx2;
 
-    public terrainData(String nomT, Integer hauteurT, Integer largeurT) {
-        this.nomT = nomT;
-        this.hauteurT = hauteurT;
-        this.largeurT = largeurT;
+    public terrainData(Integer hauteurTy1, Integer largeurTx1, Integer hauteurTy2, Integer largeurTx2) {
+   
+        this.hauteurTy1 = hauteurTy1;
+        this.largeurTx1 = largeurTx1;
+        this.hauteurTy2 = hauteurTy2;
+        this.largeurTx2 = largeurTx2;
     }
-
-    public String getNomT() {
-        return nomT;
+    
+    public int getWidth(){
+        return Math.abs(largeurTx1-largeurTx2);
     }
-
-    public void setNomT(String nomT) {
-        this.nomT = nomT;
+    
+    public int getHeight(){
+        return Math.abs(hauteurTy1-hauteurTy2);
     }
-
-    public Integer getHauteurT() {
-        return hauteurT;
+    
+    public int getMinX(){
+        if (largeurTx1<largeurTx2) return largeurTx1;
+        else return largeurTx2;
     }
-
-    public void setHauteurT(Integer hauteurT) {
-        this.hauteurT = hauteurT;
+    
+    public int getMinY(){
+        if (hauteurTy1<hauteurTy2) return hauteurTy1;
+        else return hauteurTy2;
     }
-
-    public Integer getLargeurT() {
-        return largeurT;
-    }
-
-    public void setLargeurT(Integer largeurT) {
-        this.largeurT = largeurT;
-    }
-
 }

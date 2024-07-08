@@ -57,6 +57,9 @@ public class Inscription extends javax.swing.JFrame {
         inscrptPasswordTextfield = new javax.swing.JPasswordField();
         inscrptInscriptionBtn = new javax.swing.JButton();
         inscrptNomTextfield = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,10 +142,10 @@ public class Inscription extends javax.swing.JFrame {
                 inscrptEmailTextfieldActionPerformed(evt);
             }
         });
-        jPanel1.add(inscrptEmailTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 30));
+        jPanel1.add(inscrptEmailTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 230, 30));
 
         inscrptPasswordTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jPanel1.add(inscrptPasswordTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 230, 30));
+        jPanel1.add(inscrptPasswordTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 230, 30));
 
         inscrptInscriptionBtn.setBackground(new java.awt.Color(204, 255, 255));
         inscrptInscriptionBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add-user.png"))); // NOI18N
@@ -153,7 +156,7 @@ public class Inscription extends javax.swing.JFrame {
                 inscrptInscriptionBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(inscrptInscriptionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 230, 40));
+        jPanel1.add(inscrptInscriptionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 230, 40));
 
         inscrptNomTextfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         inscrptNomTextfield.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +164,25 @@ public class Inscription extends javax.swing.JFrame {
                 inscrptNomTextfieldActionPerformed(evt);
             }
         });
-        jPanel1.add(inscrptNomTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 230, 30));
+        jPanel1.add(inscrptNomTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 230, 30));
+
+        jLabel9.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText(" Mot de passe:");
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 230, 20));
+
+        jLabel10.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText(" Nom:");
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 230, 20));
+
+        jLabel11.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText(" Email:");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
@@ -297,11 +318,14 @@ public class Inscription extends javax.swing.JFrame {
     private javax.swing.JPasswordField inscrptPasswordTextfield;
     private javax.swing.JButton inscrptSeconnecterBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

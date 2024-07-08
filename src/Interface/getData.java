@@ -15,20 +15,11 @@ public class getData {
     public static Integer sIDH;
     
     public static String username;
-    public static String path;
     
-    public static String pathService;
+    public static String nomT;
     
-    public static Integer getMenuClientID;
-    
-    public static String getMenuClientNom;
-    
-    
-    public static boolean clickAdd = false;
-    
-    //public static Double soldePayer;
-    
-   // public static Double soldeRestePayer;
-    
-    public static Double soldeTotaleTotale;
+    public static Integer hauteurTy1;
+    public static Integer largeurTx1;
+    public static Integer hauteurTy2;
+    public static Integer largeurTx2;
 }

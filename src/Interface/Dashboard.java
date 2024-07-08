@@ -5,6 +5,7 @@
 package Interface;
 
 import Controller.DashboardController;
+import Controller.MyObjectController;
 import Controller.ZoneDessinController;
 import java.util.*;
 import javax.swing.*;
@@ -31,21 +32,61 @@ public class Dashboard extends javax.swing.JFrame {
     private ResultSet result;
     
     Graphics g;
+    
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
+        
         initComponents();
                 
         displayUsername();
         
-//        g = jPanelZoneDessin.getGraphics();
-//        jPanelZoneDessin.paintComponents(g);
-//        DashboardController dash = new DashboardController(jPanelZoneDessin);
-//        jPanelZoneDessin.addMouseListener(new ZoneDessinController (dash));
-//        dash.start();
+        ZonneDessinContrainte jPanelZoneDessin = new ZonneDessinContrainte();
+        DashboardController dash = new DashboardController(jPanelZoneDessin, 
+                jButtonValiderTerrain ,rectangleD, ligneD, cercleD, gaumeD);
+        jPanelZoneDessin.addMouseListener(new ZoneDessinController(dash));
+        ajouterMonZoneDessinContrainte(jPanelZoneDessin);
+        dash.start();
+        
+        //Les formes
+        sourisD.setSelected(true);
+        texteD.setSelected(false);
+        ligneD.setSelected(false);
+        rectangleD.setSelected(false);
+        cercleD.setSelected(false);
+        gaumeD.setSelected(false);
+        
+        //Les couleurs
+        noireCou.setSelected(true);
+        blancCou.setSelected(false);
+        rougeCou.setSelected(false);
+        bleueCou.setSelected(false);
+        verteCou.setSelected(false);
+        jauneCou.setSelected(false);
+        orangeCou.setSelected(false);
+        roseCou.setSelected(false);
+        
     
     }
+    
+    public void ajouterMonZoneDessinContrainte(ZonneDessinContrainte jPanelZoneDessin){
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanelZoneDessin);
+        jPanelZoneDessin.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(500, 1000, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(100, 480, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanelZoneDessin, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 1000, 480));
+       
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +105,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabelNomUtilisateur = new javax.swing.JLabel();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         dashboardLogoutBtn = new javax.swing.JLabel();
         sectionTerain = new javax.swing.JPanel();
@@ -74,6 +118,10 @@ public class Dashboard extends javax.swing.JFrame {
         jButtonValiderTerrain = new javax.swing.JButton();
         jSpinnerLargeurTerrain = new javax.swing.JSpinner();
         jSpinnerHauteurTerrain = new javax.swing.JSpinner();
+        jSpinnerHauteurTerrain1 = new javax.swing.JSpinner();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jSpinnerLargeurTerrain1 = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         sectionMaison = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
@@ -99,22 +147,25 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jLabelColorPicker = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        rectangleD = new javax.swing.JLabel();
-        cercleD = new javax.swing.JLabel();
-        ligneD = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanelZoneDessin = new javax.swing.JPanel();
+        jToolBar1 = new javax.swing.JToolBar();
+        sourisD = new javax.swing.JToggleButton();
+        texteD = new javax.swing.JToggleButton();
+        rectangleD = new javax.swing.JToggleButton();
+        ligneD = new javax.swing.JToggleButton();
+        cercleD = new javax.swing.JToggleButton();
+        gaumeD = new javax.swing.JToggleButton();
+        jToolBar3 = new javax.swing.JToolBar();
+        noireCou = new javax.swing.JToggleButton();
+        blancCou = new javax.swing.JToggleButton();
+        rougeCou = new javax.swing.JToggleButton();
+        bleueCou = new javax.swing.JToggleButton();
+        verteCou = new javax.swing.JToggleButton();
+        jauneCou = new javax.swing.JToggleButton();
+        orangeCou = new javax.swing.JToggleButton();
+        roseCou = new javax.swing.JToggleButton();
+        jLabel23 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButtonEffacerTout = new javax.swing.JButton();
@@ -131,7 +182,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user (2).png"))); // NOI18N
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 50, 70));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 0, 50, 50));
 
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,7 +190,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/folder_1.png"))); // NOI18N
         jLabel7.setText("Ouvrir");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 100, 70));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 100, 50));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,7 +198,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/new-document.png"))); // NOI18N
         jLabel8.setText("Nouveau");
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 100, 70));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 100, 50));
 
         jLabel24.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,7 +206,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/diskette (1).png"))); // NOI18N
         jLabel24.setText("Enregistrer");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 100, 70));
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 100, 50));
 
         jLabel16.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,14 +214,42 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/save.png"))); // NOI18N
         jLabel16.setText("Enregistrer sous");
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 150, 70));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 150, 50));
 
         jLabelNomUtilisateur.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         jLabelNomUtilisateur.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNomUtilisateur.setText("User name");
-        jPanel1.add(jLabelNomUtilisateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(1047, 6, 140, 60));
+        jPanel1.add(jLabelNomUtilisateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(1047, 6, 140, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 70));
+        jToolBar2.setBackground(new java.awt.Color(102, 102, 102));
+        jToolBar2.setRollover(true);
+
+        jButton2.setBackground(new java.awt.Color(102, 102, 102));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/arrow-left.png"))); // NOI18N
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton2);
+
+        jButton4.setBackground(new java.awt.Color(102, 102, 102));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/right-arrow (1).png"))); // NOI18N
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton4);
+
+        jPanel1.add(jToolBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 90, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 50));
 
         jPanel2.setBackground(new java.awt.Color(136, 157, 236));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,19 +262,19 @@ public class Dashboard extends javax.swing.JFrame {
                 dashboardLogoutBtnMouseClicked(evt);
             }
         });
-        jPanel2.add(dashboardLogoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 110, 30));
+        jPanel2.add(dashboardLogoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 110, 30));
 
         sectionTerain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel36.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel36.setText("Largeur:");
-        sectionTerain.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 70, 20));
+        jLabel36.setText("Largeur(x1):");
+        sectionTerain.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 90, 20));
 
         jLabel37.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText(" Hauteur:");
-        sectionTerain.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 70, 20));
+        jLabel37.setText(" Hauteur(y1):");
+        sectionTerain.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 90, 20));
 
         jLabel41.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -203,6 +282,7 @@ public class Dashboard extends javax.swing.JFrame {
         sectionTerain.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 20));
 
         jTextFieldNomTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jTextFieldNomTerrain.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldNomTerrain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNomTerrainActionPerformed(evt);
@@ -212,8 +292,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButtonValiderTerrain.setBackground(new java.awt.Color(8, 126, 245));
         jButtonValiderTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButtonValiderTerrain.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonValiderTerrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
+        jButtonValiderTerrain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/correction.png"))); // NOI18N
         jButtonValiderTerrain.setText("Valider");
         jButtonValiderTerrain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonValiderTerrain.setMaximumSize(new java.awt.Dimension(110, 31));
@@ -223,7 +302,7 @@ public class Dashboard extends javax.swing.JFrame {
                 jButtonValiderTerrainActionPerformed(evt);
             }
         });
-        sectionTerain.add(jButtonValiderTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 110, -1));
+        sectionTerain.add(jButtonValiderTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 110, -1));
 
         jSpinnerLargeurTerrain.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerLargeurTerrain.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
@@ -233,7 +312,25 @@ public class Dashboard extends javax.swing.JFrame {
         jSpinnerHauteurTerrain.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
         sectionTerain.add(jSpinnerHauteurTerrain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 110, 30));
 
-        jPanel2.add(sectionTerain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 150));
+        jSpinnerHauteurTerrain1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerHauteurTerrain1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionTerain.add(jSpinnerHauteurTerrain1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 110, 30));
+
+        jLabel49.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel49.setText(" Hauteur(y2):");
+        sectionTerain.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 90, 20));
+
+        jLabel50.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel50.setText("Largeur(x2):");
+        sectionTerain.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 90, 20));
+
+        jSpinnerLargeurTerrain1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jSpinnerLargeurTerrain1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
+        sectionTerain.add(jSpinnerLargeurTerrain1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 110, 30));
+
+        jPanel2.add(sectionTerain, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 280, 200));
 
         jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -245,12 +342,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel38.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel38.setText("Largeur:");
-        sectionMaison.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
+        sectionMaison.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 70, 20));
 
         jButtonValiderMaison.setBackground(new java.awt.Color(8, 126, 245));
         jButtonValiderMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButtonValiderMaison.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonValiderMaison.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
+        jButtonValiderMaison.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/correction.png"))); // NOI18N
         jButtonValiderMaison.setText("Valider");
         jButtonValiderMaison.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonValiderMaison.setMaximumSize(new java.awt.Dimension(110, 31));
@@ -260,13 +356,13 @@ public class Dashboard extends javax.swing.JFrame {
                 jButtonValiderMaisonActionPerformed(evt);
             }
         });
-        sectionMaison.add(jButtonValiderMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 110, -1));
+        sectionMaison.add(jButtonValiderMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 110, -1));
 
         jLabel40.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel40.setText("Nbr de chambre:");
         jLabel40.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        sectionMaison.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 110, 20));
+        sectionMaison.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 110, 20));
 
         jTextFieldNomMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         sectionMaison.add(jTextFieldNomMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, 30));
@@ -299,19 +395,19 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel44.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel44.setText("Bas");
-        sectionMaison.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, 20));
+        sectionMaison.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, -1));
 
         jLabel43.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel43.setText("Gauche");
         jLabel43.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        sectionMaison.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, 20));
+        sectionMaison.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, 20));
 
         jLabel48.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel48.setText("Droite");
         jLabel48.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        sectionMaison.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 110, 20));
+        sectionMaison.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 110, 20));
 
         jSpinnerHautMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerHautMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
@@ -319,19 +415,19 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSpinnerBasMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerBasMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
-        sectionMaison.add(jSpinnerBasMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 110, 30));
+        sectionMaison.add(jSpinnerBasMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 110, 30));
 
         jSpinnerNbrDeChambreMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerNbrDeChambreMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
-        sectionMaison.add(jSpinnerNbrDeChambreMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 110, 30));
+        sectionMaison.add(jSpinnerNbrDeChambreMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 110, 30));
 
         jSpinnerGaucheMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerGaucheMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
-        sectionMaison.add(jSpinnerGaucheMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, 30));
+        sectionMaison.add(jSpinnerGaucheMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, 30));
 
         jSpinnerDroiteMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerDroiteMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
-        sectionMaison.add(jSpinnerDroiteMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 110, 30));
+        sectionMaison.add(jSpinnerDroiteMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 110, 30));
 
         jSpinnerHauteurMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerHauteurMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
@@ -339,16 +435,16 @@ public class Dashboard extends javax.swing.JFrame {
 
         jSpinnerLargeurMaison.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jSpinnerLargeurMaison.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50000, 1));
-        sectionMaison.add(jSpinnerLargeurMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 110, 30));
+        sectionMaison.add(jSpinnerLargeurMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 110, 30));
 
-        jPanel2.add(sectionMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 280, 360));
+        jPanel2.add(sectionMaison, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, 330));
 
         jLabel9.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Générer Maison");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 90, 40));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 90, 20));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 300, 620));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 300, 640));
 
         jPanel8.setBackground(new java.awt.Color(136, 157, 236));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -359,77 +455,215 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(136, 157, 236));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelColorPicker.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabelColorPicker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/art.png"))); // NOI18N
-        jLabelColorPicker.setText("    Couleur");
-        jLabelColorPicker.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelColorPicker.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelColorPickerMouseClicked(evt);
-            }
-        });
-        jPanel10.add(jLabelColorPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 60));
-
         jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 160, -1));
 
         jPanel4.setBackground(new java.awt.Color(136, 157, 236));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel8.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 160, -1));
 
-        jPanel11.setBackground(new java.awt.Color(136, 157, 236));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cursor.png"))); // NOI18N
-        jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 60));
-
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/text.png"))); // NOI18N
-        jPanel11.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 60));
-
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/inclined-pencil.png"))); // NOI18N
-        jPanel11.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 60));
-
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/opened-door-aperture.png"))); // NOI18N
-        jPanel11.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 60));
-
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sink.png"))); // NOI18N
-        jPanel11.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 60));
-
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rubber.png"))); // NOI18N
-        jPanel11.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, -1, 60));
-
-        rectangleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rectangle.png"))); // NOI18N
-        jPanel11.add(rectangleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, 60));
-
-        cercleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/dry-clean.png"))); // NOI18N
-        jPanel11.add(cercleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, -1, 60));
-
-        ligneD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/line.png"))); // NOI18N
-        jPanel11.add(ligneD, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, -1, 60));
-
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/window.png"))); // NOI18N
-        jPanel11.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, -1, 60));
-
-        jPanel8.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 60));
-
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/resize.png"))); // NOI18N
-        jLabel22.setText("     Rédimentionner");
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/art.png"))); // NOI18N
+        jLabel22.setText("Couleur");
         jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 140, 60));
+        jPanel8.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 80, 30));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 1020, 60));
+        jToolBar1.setBackground(new java.awt.Color(136, 157, 236));
+        jToolBar1.setFloatable(true);
+        jToolBar1.setRollover(true);
 
-        jPanelZoneDessin.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelZoneDessin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane1.setViewportView(jPanelZoneDessin);
+        sourisD.setBackground(new java.awt.Color(136, 157, 236));
+        sourisD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cursor.png"))); // NOI18N
+        sourisD.setFocusable(false);
+        sourisD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        sourisD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        sourisD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        sourisD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sourisDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(sourisD);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 1000, 480));
+        texteD.setBackground(new java.awt.Color(136, 157, 236));
+        texteD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/text.png"))); // NOI18N
+        texteD.setFocusable(false);
+        texteD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        texteD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        texteD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        texteD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                texteDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(texteD);
+
+        rectangleD.setBackground(new java.awt.Color(136, 157, 236));
+        rectangleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rectangle.png"))); // NOI18N
+        rectangleD.setFocusable(false);
+        rectangleD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        rectangleD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        rectangleD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rectangleD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rectangleDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(rectangleD);
+
+        ligneD.setBackground(new java.awt.Color(136, 157, 236));
+        ligneD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/line.png"))); // NOI18N
+        ligneD.setFocusable(false);
+        ligneD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ligneD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        ligneD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        ligneD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ligneDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(ligneD);
+
+        cercleD.setBackground(new java.awt.Color(136, 157, 236));
+        cercleD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/dry-clean.png"))); // NOI18N
+        cercleD.setFocusable(false);
+        cercleD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cercleD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        cercleD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cercleD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cercleDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cercleD);
+
+        gaumeD.setBackground(new java.awt.Color(136, 157, 236));
+        gaumeD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rubber.png"))); // NOI18N
+        gaumeD.setFocusable(false);
+        gaumeD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gaumeD.setMargin(new java.awt.Insets(2, 20, 3, 20));
+        gaumeD.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        gaumeD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gaumeDActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(gaumeD);
+
+        jPanel8.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 80));
+
+        jToolBar3.setBackground(new java.awt.Color(136, 157, 236));
+        jToolBar3.setRollover(true);
+
+        noireCou.setBackground(new java.awt.Color(136, 157, 236));
+        noireCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube.png"))); // NOI18N
+        noireCou.setFocusable(false);
+        noireCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        noireCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        noireCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noireCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(noireCou);
+
+        blancCou.setBackground(new java.awt.Color(136, 157, 236));
+        blancCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (1).png"))); // NOI18N
+        blancCou.setFocusable(false);
+        blancCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        blancCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        blancCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blancCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(blancCou);
+
+        rougeCou.setBackground(new java.awt.Color(136, 157, 236));
+        rougeCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (2).png"))); // NOI18N
+        rougeCou.setFocusable(false);
+        rougeCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        rougeCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rougeCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rougeCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(rougeCou);
+
+        bleueCou.setBackground(new java.awt.Color(136, 157, 236));
+        bleueCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (4).png"))); // NOI18N
+        bleueCou.setFocusable(false);
+        bleueCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bleueCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bleueCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bleueCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(bleueCou);
+
+        verteCou.setBackground(new java.awt.Color(136, 157, 236));
+        verteCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (9).png"))); // NOI18N
+        verteCou.setFocusable(false);
+        verteCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        verteCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        verteCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verteCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(verteCou);
+
+        jauneCou.setBackground(new java.awt.Color(136, 157, 236));
+        jauneCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (6).png"))); // NOI18N
+        jauneCou.setFocusable(false);
+        jauneCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jauneCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jauneCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jauneCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(jauneCou);
+
+        orangeCou.setBackground(new java.awt.Color(136, 157, 236));
+        orangeCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (10).png"))); // NOI18N
+        orangeCou.setFocusable(false);
+        orangeCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        orangeCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        orangeCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orangeCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(orangeCou);
+
+        roseCou.setBackground(new java.awt.Color(136, 157, 236));
+        roseCou.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cube (8).png"))); // NOI18N
+        roseCou.setFocusable(false);
+        roseCou.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        roseCou.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        roseCou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roseCouActionPerformed(evt);
+            }
+        });
+        jToolBar3.add(roseCou);
+
+        jPanel8.add(jToolBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 30, 280, 50));
+
+        jLabel23.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/resize.png"))); // NOI18N
+        jLabel23.setText("     Rédimentionner");
+        jLabel23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel8.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 140, 80));
+
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 1020, 80));
 
         jButton5.setBackground(new java.awt.Color(8, 126, 245));
         jButton5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add.png"))); // NOI18N
         jButton5.setText("Ajouter");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -444,7 +678,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(8, 126, 245));
         jButton3.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/edit-button.png"))); // NOI18N
         jButton3.setText("Modifier");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -457,7 +690,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButtonEffacerTout.setBackground(new java.awt.Color(8, 126, 245));
         jButtonEffacerTout.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButtonEffacerTout.setForeground(new java.awt.Color(255, 255, 255));
         jButtonEffacerTout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/delete.png"))); // NOI18N
         jButtonEffacerTout.setText("Effacer tout");
         jButtonEffacerTout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -470,7 +702,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(8, 126, 245));
         jButton1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/refresh-page-option.png"))); // NOI18N
         jButton1.setText("Actualiser");
         jButton1.setToolTipText("");
@@ -500,7 +731,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButtonEffacerToutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEffacerToutActionPerformed
         // TODO add your handling code here:
-        jPanelZoneDessin.repaint();
+//        jPanelZoneDessin.repaint();
     }//GEN-LAST:event_jButtonEffacerToutActionPerformed
 
     private void dashboardLogoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardLogoutBtnMouseClicked
@@ -529,7 +760,9 @@ public class Dashboard extends javax.swing.JFrame {
         try {
             if (jTextFieldNomTerrain.getText().isEmpty()
                     || jSpinnerHauteurTerrain.getValue().equals(0)
-                    || jSpinnerLargeurTerrain.getValue().equals(0)) {
+                    || jSpinnerLargeurTerrain.getValue().equals(0)
+                    || jSpinnerHauteurTerrain1.getValue().equals(0)
+                    || jSpinnerLargeurTerrain1.getValue().equals(0)) {
                 
                 alert = new JOptionPane(JOptionPane.ERROR_MESSAGE);
                 alert.showMessageDialog(null, "S'il vous plaît, vous devez d'abord complétez ces cases.");
@@ -537,8 +770,8 @@ public class Dashboard extends javax.swing.JFrame {
             }else{
                 
                 // Insertion des données dans la base de données
-                String sql = "INSERT INTO terrain (nomT, hauteurT, largeurT)"
-                        + "VALUES (?, ?, ?)";
+                String sql = "INSERT INTO terrain (nomT, hauteurTy1, largeurTx1, hauteurTy2, largeurTx2)"
+                        + "VALUES (?, ?, ?, ?, ?)";
                 
                 connect = (Connection) database.ConnectDb();
                 
@@ -546,20 +779,29 @@ public class Dashboard extends javax.swing.JFrame {
                 prepare.setString(1, jTextFieldNomTerrain.getText());
                 prepare.setInt(2, (int) jSpinnerHauteurTerrain.getValue());
                 prepare.setInt(3, (int) jSpinnerLargeurTerrain.getValue());
+                prepare.setInt(4, (int) jSpinnerHauteurTerrain1.getValue());
+                prepare.setInt(5, (int) jSpinnerLargeurTerrain1.getValue());
                 
                 prepare.executeUpdate();
                 
                 int hauteur = (int) jSpinnerHauteurTerrain.getValue();
                 int largeur = (int) jSpinnerLargeurTerrain.getValue();
-                      
+                
+                getData.nomT = jTextFieldNomTerrain.getText();
+                getData.hauteurTy1 = (Integer) jSpinnerHauteurTerrain.getValue();
+                getData.largeurTx1 = (Integer) jSpinnerLargeurTerrain.getValue();
+                getData.hauteurTy2 = (Integer) jSpinnerHauteurTerrain1.getValue();
+                getData.largeurTx2 = (Integer) jSpinnerLargeurTerrain1.getValue();
+                
                 alert = new JOptionPane(JOptionPane.INFORMATION_MESSAGE);
                 alert.showMessageDialog(null, "Réussi");
                 
-//                g.drawRect(50, 50, largeur, hauteur);
                 
                 jTextFieldNomTerrain.setText("");
                 jSpinnerHauteurTerrain.setValue(0);
                 jSpinnerLargeurTerrain.setValue(0);
+                jSpinnerHauteurTerrain1.setValue(0);
+                jSpinnerLargeurTerrain1.setValue(0);
             }
             
             
@@ -631,6 +873,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextFieldNomTerrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomTerrainActionPerformed
@@ -641,13 +884,213 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jLabelColorPickerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelColorPickerMouseClicked
-        // TODO add your handling code here
-        ColorPicker colPick = new ColorPicker();
-        colPick.setVisible(true);
+    private void cercleDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cercleDActionPerformed
+        // TODO add your handling code here:
+        if(cercleD.isSelected()){
+            sourisD.setSelected(false);
+            texteD.setSelected(false);
+            rectangleD.setSelected(false);
+            ligneD.setSelected(false);
+            gaumeD.setSelected(false);
+        }else{
+            
+        }
         
-//       colPick.setVisible(false);
-    }//GEN-LAST:event_jLabelColorPickerMouseClicked
+    }//GEN-LAST:event_cercleDActionPerformed
+
+    private void rectangleDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectangleDActionPerformed
+        // TODO add your handling code here:
+        if(rectangleD.isSelected()){
+            sourisD.setSelected(false);
+            texteD.setSelected(false);
+            cercleD.setSelected(false);
+            ligneD.setSelected(false);
+            gaumeD.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_rectangleDActionPerformed
+
+    private void ligneDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ligneDActionPerformed
+        // TODO add your handling code here:
+        if(ligneD.isSelected()){
+            sourisD.setSelected(false);
+            texteD.setSelected(false);
+            rectangleD.setSelected(false);
+            cercleD.setSelected(false);
+            gaumeD.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_ligneDActionPerformed
+
+    private void sourisDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourisDActionPerformed
+        // TODO add your handling code here:
+        if(sourisD.isSelected()){
+            cercleD.setSelected(false);
+            texteD.setSelected(false);
+            rectangleD.setSelected(false);
+            ligneD.setSelected(false);
+            gaumeD.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_sourisDActionPerformed
+
+    private void texteDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texteDActionPerformed
+        // TODO add your handling code here:
+        if(texteD.isSelected()){
+//            texteD.setCursor(Cursor.getPredefinedCursor(7));
+            sourisD.setSelected(false);
+            cercleD.setSelected(false);
+            rectangleD.setSelected(false);
+            ligneD.setSelected(false);
+            gaumeD.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_texteDActionPerformed
+
+    private void gaumeDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gaumeDActionPerformed
+        // TODO add your handling code here:
+        if(gaumeD.isSelected()){
+            sourisD.setSelected(false);
+            texteD.setSelected(false);
+            rectangleD.setSelected(false);
+            ligneD.setSelected(false);
+            cercleD.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_gaumeDActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bleueCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bleueCouActionPerformed
+        // TODO add your handling code here:
+        if(bleueCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            noireCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_bleueCouActionPerformed
+
+    private void noireCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noireCouActionPerformed
+        // TODO add your handling code here:
+        if(noireCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_noireCouActionPerformed
+
+    private void blancCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blancCouActionPerformed
+        // TODO add your handling code here:
+        if(blancCou.isSelected()){
+            noireCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_blancCouActionPerformed
+
+    private void rougeCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rougeCouActionPerformed
+        // TODO add your handling code here:
+        if(rougeCou.isSelected()){
+            blancCou.setSelected(false);
+            noireCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_rougeCouActionPerformed
+
+    private void verteCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verteCouActionPerformed
+        // TODO add your handling code here:
+        if(verteCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            noireCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_verteCouActionPerformed
+
+    private void jauneCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jauneCouActionPerformed
+        // TODO add your handling code here:
+        if(jauneCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            noireCou.setSelected(false);
+            orangeCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_jauneCouActionPerformed
+
+    private void orangeCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orangeCouActionPerformed
+        // TODO add your handling code here:
+        if(orangeCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            noireCou.setSelected(false);
+            roseCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_orangeCouActionPerformed
+
+    private void roseCouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roseCouActionPerformed
+        // TODO add your handling code here:
+        if(roseCou.isSelected()){
+            blancCou.setSelected(false);
+            rougeCou.setSelected(false);
+            bleueCou.setSelected(false);
+            verteCou.setSelected(false);
+            jauneCou.setSelected(false);
+            orangeCou.setSelected(false);
+            noireCou.setSelected(false);
+        }else{
+            
+        }
+    }//GEN-LAST:event_roseCouActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,29 +1120,33 @@ public class Dashboard extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Dashboard().setVisible(true);
-//            }
-//        });
-        
-        // Exécuter l'application sur le thread de dispatch des événements
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                // Créer une instance de la fenêtre et la rendre visible
                 new Dashboard().setVisible(true);
             }
         });
         
-//        displayUsername();
+        // Exécuter l'application sur le thread de dispatch des événements
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                // Créer une instance de la fenêtre et la rendre visible
+//                new Dashboard().setVisible(true);
+//            }
+//        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cercleD;
+    private javax.swing.JToggleButton blancCou;
+    private javax.swing.JToggleButton bleueCou;
+    private javax.swing.JToggleButton cercleD;
     private javax.swing.JLabel dashboardLogoutBtn;
+    private javax.swing.JToggleButton gaumeD;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonEffacerTout;
     private javax.swing.JButton jButtonValiderMaison;
@@ -708,12 +1155,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -728,35 +1169,46 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelColorPicker;
     private javax.swing.JLabel jLabelNomUtilisateur;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPanelZoneDessin;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerBasMaison;
     private javax.swing.JSpinner jSpinnerDroiteMaison;
     private javax.swing.JSpinner jSpinnerGaucheMaison;
     private javax.swing.JSpinner jSpinnerHautMaison;
     private javax.swing.JSpinner jSpinnerHauteurMaison;
     private javax.swing.JSpinner jSpinnerHauteurTerrain;
+    private javax.swing.JSpinner jSpinnerHauteurTerrain1;
     private javax.swing.JSpinner jSpinnerLargeurMaison;
     private javax.swing.JSpinner jSpinnerLargeurTerrain;
+    private javax.swing.JSpinner jSpinnerLargeurTerrain1;
     private javax.swing.JSpinner jSpinnerNbrDeChambreMaison;
     private javax.swing.JTextField jTextFieldNomMaison;
     private javax.swing.JTextField jTextFieldNomTerrain;
-    private javax.swing.JLabel ligneD;
-    private javax.swing.JLabel rectangleD;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JToolBar jToolBar3;
+    private javax.swing.JToggleButton jauneCou;
+    private javax.swing.JToggleButton ligneD;
+    private javax.swing.JToggleButton noireCou;
+    private javax.swing.JToggleButton orangeCou;
+    private javax.swing.JToggleButton rectangleD;
+    private javax.swing.JToggleButton roseCou;
+    private javax.swing.JToggleButton rougeCou;
     private javax.swing.JPanel sectionMaison;
     private javax.swing.JPanel sectionTerain;
+    private javax.swing.JToggleButton sourisD;
+    private javax.swing.JToggleButton texteD;
+    private javax.swing.JToggleButton verteCou;
     // End of variables declaration//GEN-END:variables
 }

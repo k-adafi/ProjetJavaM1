@@ -60,6 +60,8 @@ public class Connecter extends javax.swing.JFrame {
         connectMotDePasseOublierBtn = new javax.swing.JLabel();
         connectConnexionBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         connectInscriptionBtn = new javax.swing.JButton();
@@ -81,7 +83,7 @@ public class Connecter extends javax.swing.JFrame {
                 connectNomTxtfieldActionPerformed(evt);
             }
         });
-        jPanelSeConnecter.add(connectNomTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 230, 30));
+        jPanelSeConnecter.add(connectNomTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 230, 30));
 
         connectPasswordTxtfield.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         connectPasswordTxtfield.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +91,7 @@ public class Connecter extends javax.swing.JFrame {
                 connectPasswordTxtfieldActionPerformed(evt);
             }
         });
-        jPanelSeConnecter.add(connectPasswordTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 30));
+        jPanelSeConnecter.add(connectPasswordTxtfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 230, 30));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,9 +100,9 @@ public class Connecter extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Se connecter");
+        jLabel5.setText(" Mot de passe:");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanelSeConnecter.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 30));
+        jPanelSeConnecter.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 230, 20));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -140,12 +142,24 @@ public class Connecter extends javax.swing.JFrame {
                 connectConnexionBtnActionPerformed(evt);
             }
         });
-        jPanelSeConnecter.add(connectConnexionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 230, 40));
+        jPanelSeConnecter.add(connectConnexionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 230, 40));
 
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Bienvenue");
         jPanelSeConnecter.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Se connecter");
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelSeConnecter.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 30));
+
+        jLabel9.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText(" Nom:");
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelSeConnecter.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 230, 20));
 
         getContentPane().add(jPanelSeConnecter, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 350, 400));
 
@@ -378,6 +392,8 @@ public class Connecter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
