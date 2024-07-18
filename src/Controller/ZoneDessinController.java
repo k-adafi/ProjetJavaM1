@@ -16,6 +16,9 @@ import java.awt.event.MouseListener;
 public class ZoneDessinController implements MouseListener{
     
     int x1, y1, x2, y2;
+    
+    int hauteurTy1, largeurTx1, hauteurTy2, largeurTx2;
+    
     DashboardController dash1;
     
     public  ZoneDessinController(DashboardController dash){
@@ -25,6 +28,9 @@ public class ZoneDessinController implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        largeurTx1=e.getX();
+        hauteurTy1=e.getY();
+        
     }
 
     @Override
@@ -41,6 +47,10 @@ public class ZoneDessinController implements MouseListener{
         x2=e.getX();
         y2=e.getY();
         dash1.doPaint(x1,y1,x2,y2);
+        
+        largeurTx2=e.getX();
+        hauteurTy2=e.getY();
+        dash1.doContrainte(hauteurTy1, largeurTx1, hauteurTy2, largeurTx2);
     }
 
     @Override

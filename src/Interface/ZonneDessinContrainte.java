@@ -85,7 +85,7 @@ public class ZonneDessinContrainte extends javax.swing.JPanel {
         
         terrain.add(new terrainData(hauteurTy1, largeurTx1, hauteurTy2, largeurTx2));
     }
-    
+
     
     @Override
     public void paint(Graphics g) {

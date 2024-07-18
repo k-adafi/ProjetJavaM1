@@ -43,6 +43,7 @@ public class MyObjectController {
     }
     
     
+    
     public boolean isInside(int x1, int y1, int x2, int y2) {
         int minX = getMinX();
         int minY = getMinY();
